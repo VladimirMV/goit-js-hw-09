@@ -25,7 +25,7 @@ stopBtn.addEventListener('click', () => {
     startBtn.disabled = false;
     stopBtn.disabled = true;
     clearInterval(intervalId);
-    console.log(stopBtn);
+    console.log("Очистили ",stopBtn);
 });
 // генератор случайного цвета
 function getRandomHexColor() {
