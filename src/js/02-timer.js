@@ -1,15 +1,11 @@
-// Напиши скрипт таймера, который ведёт обратный отсчет
-//  до определенной даты. Такой таймер может использоваться
-//   в блогах и интернет-магазинах, страницах регистрации событий, 
-//   во время технического обслуживания 
-  
+
 import flatpickr from 'flatpickr';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import 'flatpickr/dist/flatpickr.min.css';
 import 'flatpickr/dist/themes/dark.css';
 
     let selectedTime = null; 
-const refs = {
+  const refs = {
     inputDate: document.querySelector('#datetime-picker'),
     startBtn: document.querySelector('button[data-start]'),
     days: document.querySelector('[data-days]'),
@@ -17,7 +13,6 @@ const refs = {
     minutes: document.querySelector('[data-minutes]'),
     seconds: document.querySelector('[data-seconds]'),
   };
-  console.log(refs.startBtn,refs.inputDate,refs.days, refs.hours, refs.mins, refs.secs);
   
   function convertMs(ms) { 
 
@@ -26,13 +21,9 @@ const refs = {
     const hour = minute * 60;
     const day = hour * 24;
   
-    //   days
     const days = pad(Math.floor(ms / day));
-    //   hours
     const hours = pad(Math.floor((ms % day) / hour));
-    //   minutes
     const minutes = pad(Math.floor(((ms % day) % hour) / minute));
-    //   seconds
     const seconds = pad(Math.floor((((ms % day) % hour) % minute) / second));
   
     return { days, hours, minutes, seconds };
