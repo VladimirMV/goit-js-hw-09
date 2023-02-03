@@ -5,9 +5,10 @@ import 'flatpickr/dist/flatpickr.min.css';
 import 'flatpickr/dist/themes/dark.css';
 
     let selectedTime = null; 
+   
   const refs = {
     inputDate: document.querySelector('#datetime-picker'),
-    startBtn: document.querySelector('button[data-start]'),
+    startBtn: document.querySelector('button[data-startt]'),
     days: document.querySelector('[data-days]'),
     hours: document.querySelector('[data-hours]'),
     minutes: document.querySelector('[data-minutes]'),
@@ -67,8 +68,30 @@ import 'flatpickr/dist/themes/dark.css';
         const deltaTime = selectedTime - currentTime;
         const componentsTimer = convertMs(deltaTime);
         this.updateComponentsTimer(componentsTimer);
+
+        const starTik = 100*1000;
+        const starAlarm = 8*1000;
+        
+            // Звуковое оформление
+        if (deltaTime <= starTik && deltaTime > starAlarm) {
+            const audio1 = document.getElementById('kitchen-timer');
+            audio1.play();  
+          } else if (deltaTime <= starAlarm) {
+            const audio1 = document.getElementById('kitchen-timer');
+            audio1.pause(); 
+            audio1.currentTime = 0;
+            const audioTrevoga = document.getElementById('trevoga');
+            audioTrevoga.play();  
+          }
+
         if (deltaTime <= 0) {
           this.stopTimer();
+          this.isActive = false;
+          this.updateComponentsTimer({ days: '00', hours: '00', minutes: '00', seconds: '00' });
+       
+          const audioBoom = document.getElementById('boom');
+          audioBoom.play();
+
         }
       }, 1000);
     }
@@ -84,7 +107,7 @@ import 'flatpickr/dist/themes/dark.css';
       clearInterval(this.timerID);
     }
   }
- // debugger
+   
   const timer = new Timer();
   flatpickr(refs.inputDate, options);
   refs.startBtn.addEventListener('click', () => timer.startTimer());
