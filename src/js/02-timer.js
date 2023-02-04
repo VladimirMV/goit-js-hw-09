@@ -13,6 +13,7 @@ import 'flatpickr/dist/themes/dark.css';
     hours: document.querySelector('[data-hours]'),
     minutes: document.querySelector('[data-minutes]'),
     seconds: document.querySelector('[data-seconds]'),
+     body: document.querySelector('body'),
   };
   
   function convertMs(ms) { 
@@ -61,27 +62,28 @@ import 'flatpickr/dist/themes/dark.css';
       if (this.isActive) {
         return;
       }
-  
+      
       this.isActive = true;
       this.timerID = setInterval(() => {
         const currentTime = Date.now();
         const deltaTime = selectedTime - currentTime;
         const componentsTimer = convertMs(deltaTime);
         this.updateComponentsTimer(componentsTimer);
-
         const starTik = 100*1000;
         const starAlarm = 8*1000;
         
             // Звуковое оформление
         if (deltaTime <= starTik && deltaTime > starAlarm) {
             const audio1 = document.getElementById('kitchen-timer');
-            audio1.play();  
+            audio1.play(); 
+            refs.startBtn.textContent = 'Start HIMARS. Time to Goal'; 
           } else if (deltaTime <= starAlarm) {
             const audio1 = document.getElementById('kitchen-timer');
             audio1.pause(); 
             audio1.currentTime = 0;
             const audioTrevoga = document.getElementById('trevoga');
-            audioTrevoga.play();  
+            audioTrevoga.play(); 
+            refs.body.style.backgroundColor = "#ff0000"; 
           }
 
         if (deltaTime <= 0) {
@@ -107,7 +109,7 @@ import 'flatpickr/dist/themes/dark.css';
       clearInterval(this.timerID);
     }
   }
-   
+  
   const timer = new Timer();
   flatpickr(refs.inputDate, options);
   refs.startBtn.addEventListener('click', () => timer.startTimer());
