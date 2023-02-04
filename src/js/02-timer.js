@@ -76,7 +76,7 @@ import 'flatpickr/dist/themes/dark.css';
         if (deltaTime <= starTik && deltaTime > starAlarm) {
             const audio1 = document.getElementById('kitchen-timer');
             audio1.play(); 
-            refs.startBtn.textContent = 'Start HIMARS. Time to Goal'; 
+            refs.startBtn.textContent = 'Start HIMARS. Time to GOAL'; 
           } else if (deltaTime <= starAlarm) {
             const audio1 = document.getElementById('kitchen-timer');
             audio1.pause(); 
