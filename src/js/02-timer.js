@@ -90,7 +90,7 @@ import 'flatpickr/dist/themes/dark.css';
           this.stopTimer();
           this.isActive = false;
           this.updateComponentsTimer({ days: '00', hours: '00', minutes: '00', seconds: '00' });
-       
+          refs.startBtn.textContent = 'TARGET HIT'; 
           const audioBoom = document.getElementById('boom');
           audioBoom.play();
 
